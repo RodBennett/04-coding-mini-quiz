@@ -74,6 +74,13 @@ padding: 20px;
     margin-top: 20px;
 }
 
+.form-card {
+    background-color: white;
+    height: 30vh;
+    width: 30%;
+    padding: 10px;
+    margin: auto;
+}
 .hide {
     display: none;
 }

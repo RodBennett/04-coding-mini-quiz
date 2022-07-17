@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,29 +8,46 @@
     <link rel="stylesheet" href="style.css">
     <title>Coding Quiz</title>
 </head>
+
 <body>
     <header>
         <a href="#">Highscore</a>
         <h4>Time Remaining: <span id="time-remaining">75</span></h4>
     </header>
-
+    <div id="intro">Press Start To Begin Quiz</div>
     <div class="container">
-        <div id="question-container">
-            <div id="intro">Press Start To Begin Quiz</div>
-            <div id=questions class="hide">
-            <div id="answer-buttons" class="hide">
-                <button class="btn">Answer 1</button>
+        <div id="question-container" class="hide">
+            <div id="question"></div>
+            <div id="answer-buttons">
+                <!-- <button class="btn">Answer 1</button>
                 <button class="btn">Answer 2</button>
                 <button class="btn">Answer 3</button>
-                <button class="btn">Answer 4</button>
+                <button class="btn">Answer 4</button>  -->
             </div>
         </div>
+
         <div class="controls">
             <button id="start-btn" class="start-btn btn">Start Quiz</button>
             <button id="next-btn" class="next-btn btn hide">Next</button>
             <button id="exit-btn" class="exit-btn btn hide">Exit Quiz</button>
         </div>
     </div>
-   <script src="script.js"></script> 
+
+    <section id="form-card" class="hide">
+        <form action="/action_page.php">
+            <h3>All done</h3>
+            <p>Your highscore is </p>
+            <h4>Please enter your initials below</h4>
+            <label for="initials">Initials:</label><br>
+            <input type="text" id="firstname" name="firstname" placeholder="Input initials"><br>
+            <input type="submit" value="Submit">
+        </form>
+    </section>
+    <section id="results-card" class="hide">
+        <h2>
+            </h3>
+    </section>
+    <script src="script.js"></script>
 </body>
+
 </html>

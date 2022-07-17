@@ -2,24 +2,101 @@
 const startBtn = document.querySelector("#start-btn");
 const nextBtn = document.querySelector("#next-btn");
 const exitBtn = document.querySelector("#exit-btn");
-const answerBtn = document.querySelector("#answer-buttons");
-const showQuestion = document.querySelector('#questions');
+const answerButtonContainer = document.querySelector("#answer-buttons");
+const questionElement = document.querySelector('#question');
 const welcome = document.querySelector("#intro");
+const questionContainerEl = document.querySelector("#question-container");
+
+let currentQuestionIndex;
+
 
 let timerElement = document.querySelector("#time-remaining");
 let secondsLeft = 5;
 
-// add event listeners to buttons
-startBtn.addEventListener('click', startQuiz);
-
+const questions = [
+    { 
+    question: "What do the initials DOM stand for?",
+    answers: [
+        {text: 'Dogel On Mars', correct: false},
+        {text: 'Data Orangautan Master', correct: false},
+        {text: 'Document Object Model', correct: true},
+        {text: 'Decimal Object Method', correct: false}
+            ] 
+    },
+        {
+    question: "Which of the following is NOT a key word of a variable?",
+        answers: [
+            {text: 'var', correct: false},
+            {text: 'HELP!', correct: true},
+            {text: 'const', correct: false},
+            {text: 'let', correct: false}
+            ] 
+    },
+        {
+    question: 'How many if/esle statements can one function handle?',
+        answers: [
+            {text: '7', correct: false},
+            {text: '8', correct: false},
+            {text: '9', correct: false},
+            {text: 'no limit', correct: true}
+            ] 
+    },
+        {
+     question: "How do you add functionality to a button?",
+        answers: [
+            {text: '.addEventListener', correct: true},
+            {text: '.querySelector', correct: false},
+            {text: '.setAttribute', correct: false},
+            {text: '.getElementbyId', correct: true}
+            ] 
+        },
+        {
+    question: "What should we use the preventDefault method for?",
+         answers: [
+            {text: 'To prevent HTML forms from deleting inputs', correct: true},
+            {text: 'To prevent new coders from learning js', correct: false},
+            {text: 'To prevent a nuclear holocaust', correct: false},
+            {text: 'To prevent defaulting on debts', correct: false}
+        ]
+     }
+]
 
 function startQuiz() {
     startBtn.classList.add('hide');
     welcome.classList.add('hide');
-    showQuestion.classList.remove('hide');
+    answerButtonContainer.classList.remove('hide');
+    questionContainerEl.classList.remove('hide');
     nextBtn.classList.remove('hide');
+    currentQuestionIndex = 0;
+    showQuestion();
     setTime();
 }
+
+
+function showQuestion() {
+    questionElement.textContent = questions[currentQuestionIndex].question
+    //loop through the answers generate buttons for the answers and append to div #answer-buttons
+    const thisAnswers = questions[currentQuestionIndex].answers;
+    for (let index = 0; index < thisAnswers.length; index++) {
+        // const element =;
+        var answerButton = document.createElement('button');
+        answerButton.textContent = thisAnswers[index].text
+        answerButtonContainer.append(answerButton)
+    }
+}
+
+function selectAnswer() {
+ //currentQuestionIndex++
+ //showQuestion()
+}
+
+
+
+// add event listeners to buttons
+startBtn.addEventListener('click', startQuiz);
+//nextBtn.addEventListener('click', setNextQuestion);
+exitBtn.addEventListener('click', sendMessage);
+// answerBtn.addEventListener('click', setNextQuestion);
 
 function setTime() {
     let timerInterval = setInterval(function() {
@@ -39,6 +116,11 @@ function sendMessage() {
     exitBtn.classList.remove('hide');
 }
 
+
+
+
+// reducing by 10 seconds for wrong answer: 
+// timerElement.innerHTML = -10;
 // function selectAnswer() {
 
 // }
@@ -77,20 +159,6 @@ function sendMessage() {
 // // function getItem() {
     
 // // }
-
-
-
-
-// // let quizQuestions = [
-
-// // { "1. What do the initials DOM stand for?"},
-
-// // {"2.  Which of the following is NOT a key word of a variable?"},
-
-// // {"3. How many if/esle statements can one function handle? },
-// // {"4. How do you add functionality to a button?"},
-// // {"5. What should we use the eventDefault method for?"},
-// // ]
 
 
 // // // CREATE APPEND 
