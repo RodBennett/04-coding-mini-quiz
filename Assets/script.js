@@ -6,12 +6,14 @@ const answerButtonContainer = document.querySelector("#answer-buttons");
 const questionElement = document.querySelector('#question');
 const welcome = document.querySelector("#intro");
 const questionContainerEl = document.querySelector("#question-container");
+const timerElement = document.querySelector("#time-remaining");
+const scoreElement = document.querySelector('#score');
 
+//Game variables
+let score;
 let currentQuestionIndex;
-
-
-let timerElement = document.querySelector("#time-remaining");
-let secondsLeft = 5;
+let secondsLeft;
+let timerInterval;
 
 const questions = [
     { 
@@ -47,7 +49,7 @@ const questions = [
             {text: '.addEventListener', correct: true},
             {text: '.querySelector', correct: false},
             {text: '.setAttribute', correct: false},
-            {text: '.getElementbyId', correct: true}
+            {text: '.getElementbyId', correct: false}
             ] 
         },
         {
@@ -62,12 +64,16 @@ const questions = [
 ]
 
 function startQuiz() {
+    secondsLeft = 10;
+    currentQuestionIndex = 0;
+    score =0;
+    scoreElement.textContent = score;
+    timerElement.textContent=secondsLeft;
     startBtn.classList.add('hide');
     welcome.classList.add('hide');
     answerButtonContainer.classList.remove('hide');
     questionContainerEl.classList.remove('hide');
     nextBtn.classList.remove('hide');
-    currentQuestionIndex = 0;
     showQuestion();
     setTime();
 }
@@ -75,46 +81,70 @@ function startQuiz() {
 
 function showQuestion() {
     questionElement.textContent = questions[currentQuestionIndex].question
+    answerButtonContainer.innerHTML=''
     //loop through the answers generate buttons for the answers and append to div #answer-buttons
     const thisAnswers = questions[currentQuestionIndex].answers;
     for (let index = 0; index < thisAnswers.length; index++) {
         // const element =;
         var answerButton = document.createElement('button');
         answerButton.textContent = thisAnswers[index].text
+        answerButton.dataset.isCorrect = thisAnswers[index].correct
+        answerButton.addEventListener('click', selectAnswer)
         answerButtonContainer.append(answerButton)
     }
 }
 
-function selectAnswer() {
- //currentQuestionIndex++
- //showQuestion()
+function selectAnswer(e) {
+    console.log(e.target.dataset.isCorrect)
+    // figure out if there is another question to go on to or if we are at the end
+    if (e.target.dataset.isCorrect==="true") {
+        console.log('answer was correct')
+        score += 5;
+        scoreElement.textContent = score;
+
+    } else {
+        console.log('answer was incorrect')
+        //take time away from timer
+    }
+
+    if (currentQuestionIndex < questions.length - 1) {
+        currentQuestionIndex++
+        showQuestion()
+    } else {
+        endGame()
+    }
 }
+
+function endGame() {
+    showQuestion.textContent = "Would you like to try again?";
+    nextBtn.classList.add('hide');
+    startBtn.classList.remove('hide');
+    exitBtn.classList.remove('hide');
+    clearInterval(timerInterval);
+}
+
+
+
 
 
 
 // add event listeners to buttons
 startBtn.addEventListener('click', startQuiz);
+
 //nextBtn.addEventListener('click', setNextQuestion);
-exitBtn.addEventListener('click', sendMessage);
+exitBtn.addEventListener('click', endGame);
 // answerBtn.addEventListener('click', setNextQuestion);
 
 function setTime() {
-    let timerInterval = setInterval(function() {
+    timerInterval = setInterval(function() {
         secondsLeft--;
         timerElement.textContent = secondsLeft;
-        if(secondsLeft === 0) {
-            clearInterval(timerInterval);
-            sendMessage();
+        if(secondsLeft <= 0) {
+            endGame();
         }
     }, 1000);
 }
 
-function sendMessage() {
-    showQuestion.textContent = "Would you like to try again?";
-    nextBtn.classList.add('hide');
-    startBtn.classList.remove('hide');
-    exitBtn.classList.remove('hide');
-}
 
 
 
