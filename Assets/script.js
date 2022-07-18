@@ -5,13 +5,14 @@ const playAgainBtn = document.querySelector('#play-again-btn');
 const checkScoreBtn = document.querySelector('#check-score-btn');
 const answerButtonContainer = document.querySelector("#answer-buttons");
 const submitBtn = document.querySelector('#submit-button');
+const tryAgainBtn = document.getElementById('tryagain-btn');
 const questionElement = document.querySelector('#question');
 const welcome = document.querySelector("#intro");
 const questionContainerEl = document.querySelector("#question-container");
 const timerElement = document.querySelector("#time-remaining");
 const scoreElement = document.querySelector('#score');
 const formScoreElement = document.getElementById('form-score');
-const getInitialsElement = document.getElementById('init)');
+const initialsElement = document.querySelector('#initials')
 const formElement = document.getElementById('form-card');
 const correctWrong = document.getElementById('correct-wrong');
 
@@ -82,6 +83,7 @@ function startQuiz() {
     questionContainerEl.classList.remove('hide');
     checkScoreBtn.classList.add('hide');
     correctWrong.textContent = '';
+    initialsElement.textContent = '';
     showQuestion();
     setTime();
 }
@@ -127,24 +129,37 @@ function endGame() {
     startBtn.classList.remove('hide');
     startBtn.textContent = 'Play Again?'
     quitQuizBtn.classList.remove('hide');
+    tryAgainBtn.addEventListener('click', startQuiz);
     clearInterval(timerInterval);
 }
-
-function goodBye() {
+// End of quiz if user chooses
+quitQuizBtn.addEventListener('click', function goodBye() {
     questionContainerEl.textContent = 'Thank you and goodbye'
-}
+});
+//makes the final form for users to input initials visible
 function highScore() {
     formElement.classList.remove('hide');
 }
 
-function storeData(){
-    localStorage.setItem('Initials' + score)
+// Set form initials to local storage
+submitBtn.addEventListener('click', function(event) {
+    event.preventDefault();
+    var formInput = {
+       initials: initialsElement.value.trim(),
+    };
+    localStorage.setItem("input", JSON.stringify(formInput));
+});
+
+// Get initials from local storage
+function renderMessage() {
+    var userInitials = JSON.parse(localStorage.getItem("formInput"));
+    document.querySelector('#init').textContent = userInitials.initials + score
 }
+
 // add event listeners to buttons
 startBtn.addEventListener('click', startQuiz);
-exitBtn.addEventListener('click', goodBye);
 
-
+// timer
 function setTime() {
     timerInterval = setInterval(function() {
         secondsLeft--;
@@ -154,37 +169,3 @@ function setTime() {
         }
     }, 1000);
 }
-
-
-
-// // // CREATE APPEND 
-// // // var tagName = prompt("Please enter an HTML Tag (ex. h1, h2, p, div):", "enter tag");
-
-// // // if (tagName !== "h1" && tagName !== "h2" && tagName !== "p" && tagName !== "div") {
-// // //   alert("please enter a valid tag");
-// // // } else {
-// // //   // Creates element based on tag entered by user
-// // //   var tag = document.createElement(tagName);
-
-// // //   // Adds text content to created tag
-// // //   tag.textContent = "This was made via prompts. It's a " + tagName + ".";
-  
-// // //   // Appends tag as child of document body
-  // document.body.appendChild(tag);
-// // // }
-
-// // // var nextTag = confirm("Would you like to add another tag?");
-
-// // // // Change event
-// // // typefaceEl.addEventListener('change', function (event) {
-// // //   event.preventDefault();
-// // //   typeface = typefaceEl.value;
-// // //   document.querySelector('.container').style.fontFamily = typeface;
-// // // });
-
-//function getWins() {
-// Get stored value from client storage, if it exists
-//var storedWins = localStorage.getItem("winCount");
-
-// // //     // If stored value doesn't exist, set counter to 0
-//if (storedWins === null) {

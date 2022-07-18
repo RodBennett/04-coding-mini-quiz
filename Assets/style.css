@@ -54,7 +54,7 @@ padding: 20px;
     margin-top: 10px;
 }
 
-.start-btn, .check-score-btn, .quit-btn {
+.start-btn, .check-score-btn, .quit-btn, .tryagain-btn {
     margin-top: 10%;
     background-color: rgb(44, 229, 44);
     font-size: 150%;
