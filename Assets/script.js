@@ -1,13 +1,19 @@
 // Define variables
 const startBtn = document.querySelector("#start-btn");
-const nextBtn = document.querySelector("#next-btn");
-const exitBtn = document.querySelector("#exit-btn");
+const quitQuizBtn = document.querySelector("#quit-btn");
+const playAgainBtn = document.querySelector('#play-again-btn');
+const checkScoreBtn = document.querySelector('#check-score-btn');
 const answerButtonContainer = document.querySelector("#answer-buttons");
+const submitBtn = document.querySelector('#submit-button');
 const questionElement = document.querySelector('#question');
 const welcome = document.querySelector("#intro");
 const questionContainerEl = document.querySelector("#question-container");
 const timerElement = document.querySelector("#time-remaining");
 const scoreElement = document.querySelector('#score');
+const formScoreElement = document.getElementById('form-score');
+const getInitialsElement = document.getElementById('init)');
+const formElement = document.getElementById('form-card');
+const correctWrong = document.getElementById('correct-wrong');
 
 //Game variables
 let score;
@@ -15,6 +21,7 @@ let currentQuestionIndex;
 let secondsLeft;
 let timerInterval;
 
+// Quiz questions array:
 const questions = [
     { 
     question: "What do the initials DOM stand for?",
@@ -62,22 +69,22 @@ const questions = [
         ]
      }
 ]
-
 function startQuiz() {
-    secondsLeft = 10;
+    secondsLeft = 70;
     currentQuestionIndex = 0;
-    score =0;
+    score=0;
+    formScoreElement.textContent = 'Your high score is ';
     scoreElement.textContent = score;
     timerElement.textContent=secondsLeft;
     startBtn.classList.add('hide');
     welcome.classList.add('hide');
     answerButtonContainer.classList.remove('hide');
     questionContainerEl.classList.remove('hide');
-    nextBtn.classList.remove('hide');
+    checkScoreBtn.classList.add('hide');
+    correctWrong.textContent = '';
     showQuestion();
     setTime();
 }
-
 
 function showQuestion() {
     questionElement.textContent = questions[currentQuestionIndex].question
@@ -85,26 +92,23 @@ function showQuestion() {
     //loop through the answers generate buttons for the answers and append to div #answer-buttons
     const thisAnswers = questions[currentQuestionIndex].answers;
     for (let index = 0; index < thisAnswers.length; index++) {
-        // const element =;
         var answerButton = document.createElement('button');
-        answerButton.textContent = thisAnswers[index].text
+        answerButton.textContent = thisAnswers[index].text;
         answerButton.dataset.isCorrect = thisAnswers[index].correct
         answerButton.addEventListener('click', selectAnswer)
         answerButtonContainer.append(answerButton)
     }
 }
-
+// true or false answers
 function selectAnswer(e) {
-    console.log(e.target.dataset.isCorrect)
     // figure out if there is another question to go on to or if we are at the end
     if (e.target.dataset.isCorrect==="true") {
-        console.log('answer was correct')
         score += 5;
         scoreElement.textContent = score;
-
+        correctWrong.textContent = 'Correct!'
     } else {
-        console.log('answer was incorrect')
-        //take time away from timer
+        secondsLeft -= 10;
+        correctWrong.textContent = 'Wrong!'
     }
 
     if (currentQuestionIndex < questions.length - 1) {
@@ -116,24 +120,30 @@ function selectAnswer(e) {
 }
 
 function endGame() {
-    showQuestion.textContent = "Would you like to try again?";
-    nextBtn.classList.add('hide');
+    formScoreElement.append(score);
+    checkScoreBtn.classList.remove('hide');
+    checkScoreBtn.addEventListener('click', highScore)
+    questionContainerEl.classList.add('hide');
     startBtn.classList.remove('hide');
-    exitBtn.classList.remove('hide');
+    startBtn.textContent = 'Play Again?'
+    quitQuizBtn.classList.remove('hide');
     clearInterval(timerInterval);
 }
 
+function goodBye() {
+    questionContainerEl.textContent = 'Thank you and goodbye'
+}
+function highScore() {
+    formElement.classList.remove('hide');
+}
 
-
-
-
-
+function storeData(){
+    localStorage.setItem('Initials' + score)
+}
 // add event listeners to buttons
 startBtn.addEventListener('click', startQuiz);
+exitBtn.addEventListener('click', goodBye);
 
-//nextBtn.addEventListener('click', setNextQuestion);
-exitBtn.addEventListener('click', endGame);
-// answerBtn.addEventListener('click', setNextQuestion);
 
 function setTime() {
     timerInterval = setInterval(function() {
@@ -145,50 +155,6 @@ function setTime() {
     }, 1000);
 }
 
-
-
-
-
-// reducing by 10 seconds for wrong answer: 
-// timerElement.innerHTML = -10;
-// function selectAnswer() {
-
-// }
-// function setNextQuestion() {
-
-// // }
-
-// // function resetQuiz(){
-
-// // }
-
-// // function endQuiz() {
-// //     if (exitBtn) {
-
-// //     } 
-
-// // }
-
-
-
-// // function setTime(){
-// //     let timerInterval = setInterval(function() {
-// //         secondsLeft--;
-// //         timerElement.textContent = 'Time remaining: ' + secondsLeft;
-// //         if (secondsLeft === 0) {
-// //             clearInterval(timerInterval);
-// //             resetQuiz();
-// //   
-
-
-
-// // function setItem (){
-
-// // }
-
-// // function getItem() {
-    
-// // }
 
 
 // // // CREATE APPEND 
@@ -204,52 +170,10 @@ function setTime() {
 // // //   tag.textContent = "This was made via prompts. It's a " + tagName + ".";
   
 // // //   // Appends tag as child of document body
-// // //   document.body.appendChild(tag);
+  // document.body.appendChild(tag);
 // // // }
 
 // // // var nextTag = confirm("Would you like to add another tag?");
-
-
-
-
-
-
-// // // // Add event listeners
-
-// // // // Access toggle switch HTML element
-// // // var themeSwitcher = document.querySelector("#theme-switcher");
-// // // var container = document.querySelector(".container");
-
-// // // // Set default mode to dark
-// // // var mode = "dark";
-
-// // // // Listen for a click event on toggle switch
-// // // themeSwitcher.addEventListener("click", function() {
-// // //   // If mode is dark, apply light background
-// // //   if (mode === "dark") {
-// // //     mode = "light";
-// // //     container.setAttribute("class", "light");
-// // //   }
-// // //   // If mode is light, apply dark background 
-// // //   else {
-// // //     mode = "dark";
-// // //     container.setAttribute("class", "dark");
-// // //   }
-// // // });
-
-
-// // // //keybaord events
-// // // var typefaceEl = document.querySelector('#typeface');
-// // // var clearEl = document.querySelector('#clear');
-// // // var h1El = document.querySelector('#h1');
-// // // var h2El = document.querySelector('#h2');
-// // // var h3El = document.querySelector('#h3');
-// // // var pEl = document.querySelector('#p');
-// // // var textAreaEl = document.querySelector('#textarea');
-
-// // // var elements = [h1El, h2El, h3El, pEl];
-
-// // // var typeface;
 
 // // // // Change event
 // // // typefaceEl.addEventListener('change', function (event) {
@@ -258,70 +182,9 @@ function setTime() {
 // // //   document.querySelector('.container').style.fontFamily = typeface;
 // // // });
 
-// // // // Keydown event 
-// // // textAreaEl.addEventListener('keydown', function (event) {
-// // //   // Access value of pressed key with key property
-// // //   var key = event.key.toLowerCase();
-// // //   var alphabetNumericCharacters = 'abcdefghijklmnopqrstuvwxyz0123456789 '.split(
-// // //     ''
-// // //   );
-// // //   if (alphabetNumericCharacters.includes(key)) {
-// // //     for (var i = 0; i < elements.length; i++) {
-// // //       elements[i].textContent += event.key;
-// // //     }
-// // //   }
-// // // });
+//function getWins() {
+// Get stored value from client storage, if it exists
+//var storedWins = localStorage.getItem("winCount");
 
-// // // clearEl.addEventListener('click', function (event) {
-// // //   event.preventDefault();
-// // //   textAreaEl.value = '';
-
-// // //   for (var i = 0; i < elements.length; i++) {
-// // //     elements[i].textContent = '';
-// // //   }
-// // // });
-
-// // // // saving and displaying high score:
-
-// // // function init() {
-// // //     getWins();
-// // //     getlosses();
-// // //   }
-
-// // //   function setWins() {
-// // //     win.textContent = winCounter;
-// // //     localStorage.setItem("winCount", winCounter);
-// // //   }
-
-// // //   function getWins() {
-// // //     // Get stored value from client storage, if it exists
-// // //     var storedWins = localStorage.getItem("winCount");
 // // //     // If stored value doesn't exist, set counter to 0
-// // //     if (storedWins === null) {
-// // //       winCounter = 0;
-// // //     } else {
-// // //       // If a value is retrieved from client storage set the winCounter to that value
-// // //       winCounter = storedWins;
-// // //     }
-// // //     //Render win count to page
-// // //     win.textContent = winCounter;
-// // //   }
-
-// // //   function checkWin() {
-// // //     // If the word equals the blankLetters array when converted to string, set isWin to true
-// // //     if (chosenWord === blanksLetters.join("")) {
-// // //       // This value is used in the timer function to test if win condition is met
-// // //       isWin = true;
-// // //     }
-// // //   }
-
-// // //   function resetGame() {
-// // //   // Resets win and loss counts
-// // //   winCounter = 0;
-// // //   loseCounter = 0;
-// // //   // Renders win and loss counts and sets them into client storage
-// // //   setWins()
-// // //   setLosses()
-// // // }
-// // // // Attaches event listener to button
-// // // resetButton.addEventListener("click", resetGame);
+//if (storedWins === null) {

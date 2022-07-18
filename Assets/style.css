@@ -1,7 +1,8 @@
-*, *::before, *::after {
+* {
     box-sizing: border-box;
     font-family: sans-serif;
 }
+
 
 body {
     background-color: rgb(181, 203, 243);
@@ -26,9 +27,10 @@ header {
     box-shadow: 0px 5px 5px 5px;
     padding: 10px;
     margin-top: 10%;
-    height: 70vh;
+    height: 45vh;
     width: 75%;
     margin: auto;
+    margin-bottom: 500px;
 }
 
 #intro {
@@ -52,10 +54,14 @@ padding: 20px;
     margin-top: 10px;
 }
 
-.start-btn, .next-btn, .exit-btn {
+.start-btn, .check-score-btn, .quit-btn {
+    margin-top: 10%;
     background-color: rgb(44, 229, 44);
     font-size: 150%;
     padding: 10px;
+}
+.check-score-btn {
+    margin-top: 20%;
 }
 
 .btn:hover {
@@ -71,16 +77,40 @@ padding: 20px;
 #answer-buttons {
     display: flex;
     flex-direction: column;
+    width: 60%;
+    margin: auto;
     margin-top: 20px;
 }
 
-.form-card {
-    background-color: white;
-    height: 30vh;
-    width: 30%;
-    padding: 10px;
-    margin: auto;
+#correct-wrong {
+    margin-top: 5%;
+    color: blueviolet;
+    font-weight:bold;
+    font-size:x-large;
+    text-align: center;
 }
 .hide {
     display: none;
+}
+
+#form-card {
+    display: flex;
+    justify-content: center;
+    background-color: antiquewhite;
+    border: 10px ridge red;
+    box-shadow: 0px 5px 5px 5px;
+    padding: 10px;
+    height: 70vh;
+    width: 40%;
+    padding: 10px;
+    margin: auto;
+}
+
+#footer {
+    height: 20vh;
+    margin-top: 100px;
+}
+
+#init{
+    margin-top: 20px; 
 }
