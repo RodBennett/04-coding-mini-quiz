@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Coding Quiz</title>
+</head>
+<body>
+    <header>
+       
+        <h4>Time Remaining: <span id="time-remaining"></span></h4>
+        <h4>Score: <span id="score"></span></h4>
+    </header>
+    <div id="intro">Press Start To Begin Quiz</div>
+    <div class="container">
+        <div id="question-container" class="hide">
+            <div id="question"></div>
+            <div id="answer-buttons"></div>
+            <div id="correct-wrong"></div>
+        </div>
+
+        <div class="controls">
+            <button id="start-btn" class="start-btn btn">Start Quiz</button>
+            <a href="#form-card">
+            <button id="check-score-btn" class="check-score-btn btn hide">Check Score</button>
+            </a>
+
+        </div>
+    </div>
+
+    <section id="form-card">
+        <form>
+            <h3>All done</h3>
+            <p id="form-score"></p>
+            <h4>Please enter your initials below</h4>
+            <label for="initials" id="input">Initials:</label><br>
+            <input type="text" name="first-name" id="initials" placeholder="Input initials"><br>
+            <input type="submit" value="Submit" id="submit-button">
+            <h4 id="init">Initials: </h4>
+        </form>
+        <button id="tryagain-btn" class="tryagain-btn btn">Try Again?</button>
+            <button id="quit-btn" class="quit-btn btn hide">Quit</button>
+    </section>
+    <footer id="footer"></footer>
+    <script src="script.js"></script> 
+</body>
+</html>
