@@ -1,6 +1,8 @@
 04 Coding Quiz challenge
 
-In this assignemnt, I created a short coding quiz using the new functions and methods from JavaScript that we've been using in class.  The quiz consists of 5 questions and it functions with the use of buttons to indicate answers.
+Deployment link: https://rodbennett.github.io/04-coding-mini-quiz/
+
+In this assignment, I created a short coding quiz using the new functions and methods from JavaScript that we've been using in class.  The quiz consists of 5 questions and it functions with the use of buttons to indicate answers.
 
 To being with, the user is faced with a start page to being the quiz.
 
