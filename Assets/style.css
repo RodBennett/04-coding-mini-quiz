@@ -64,6 +64,11 @@ padding: 20px;
     margin-top: 20%;
 }
 
+.tryagain-btn {
+    background-color: rgb(44, 229, 44);
+    height: 15vh;
+    margin:auto;
+}
 .btn:hover {
     border-color: red;
 }

@@ -1,6 +1,5 @@
 // Define variables
 const startBtn = document.querySelector("#start-btn");
-const quitQuizBtn = document.querySelector("#quit-btn");
 const playAgainBtn = document.querySelector('#play-again-btn');
 const checkScoreBtn = document.querySelector('#check-score-btn');
 const answerButtonContainer = document.querySelector("#answer-buttons");
@@ -128,14 +127,8 @@ function endGame() {
     questionContainerEl.classList.add('hide');
     startBtn.classList.remove('hide');
     startBtn.textContent = 'Play Again?'
-    quitQuizBtn.classList.remove('hide');
-    tryAgainBtn.addEventListener('click', startQuiz);
     clearInterval(timerInterval);
 }
-// End of quiz if user chooses
-quitQuizBtn.addEventListener('click', function goodBye() {
-    questionContainerEl.textContent = 'Thank you and goodbye'
-});
 //makes the final form for users to input initials visible
 function highScore() {
     formElement.classList.remove('hide');
@@ -153,11 +146,13 @@ submitBtn.addEventListener('click', function(event) {
 // Get initials from local storage
 function renderMessage() {
     var userInitials = JSON.parse(localStorage.getItem("formInput"));
-    document.querySelector('#init').textContent = userInitials.initials + score
+    document.querySelector('#init').value = userInitials.initials + score
 }
 
 // add event listeners to buttons
 startBtn.addEventListener('click', startQuiz);
+tryAgainBtn.addEventListener('click',()=>{location.assign('index.html');});
+
 
 // timer
 function setTime() {
