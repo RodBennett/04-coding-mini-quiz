@@ -40,7 +40,7 @@ This quiz built on vanilla JavaScript features a number of functions that enable
 - UI to allow users to quit or try again
 - local storage functions
 
-## Screenshots
+## Static Screenshots
 
 <img width="1226" alt="Screen Shot 2022-07-18 at 4 32 55 PM" src="https://user-images.githubusercontent.com/106923428/179628473-4fe6063d-7fe2-4421-8b22-edf69f618b58.png">
  
@@ -60,7 +60,7 @@ This quiz built on vanilla JavaScript features a number of functions that enable
 - JavaScript
 
 
-##  Future Enhancements
+## Future Enhancements
 
 This was a very challenging assignment for Week 4 of bootcamp, but I learned more from it than anything else we've done so far in the course.
 
