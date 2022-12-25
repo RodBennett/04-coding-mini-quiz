@@ -6,6 +6,8 @@
 
 A short coding quiz using the new functions and methods from JavaScript that we've been learning in bootcamp.  The quiz consists of 5 questions and it functions with the use of buttons to indicate answers.
 
+### Deployment Link: https://rodbennett.github.io/04-coding-mini-quiz/
+
 ## Table of Contents
 1. [Acceptance Criteria](#acceptance-criteria)
 2. [Features](#features)
