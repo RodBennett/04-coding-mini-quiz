@@ -2,6 +2,8 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
+### [Github Pages Deployment Link](https://rodbennett.github.io/04-coding-mini-quiz/)
+
 ## Overview
 
 A short coding quiz using the new functions and methods from JavaScript that we've been learning in bootcamp.  The quiz consists of 5 questions and it functions with the use of buttons to indicate answers.
